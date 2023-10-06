@@ -88,10 +88,10 @@ class Game: ObservableObject{
     for row in current_board {
         if row.allSatisfy { $0.mark == Mark.X } {
             // Player X has won
-            return
+            return Mark.X
         } else if row.allSatisfy { $0.mark == Mark.O } {
             // Player O has won
-            return
+            return Mark.O
         }
     }
 
@@ -100,10 +100,10 @@ class Game: ObservableObject{
         let column = current_board.map { $0[columnIndex] }
         if column.allSatisfy { $0.mark == Mark.X } {
             // Player X has won
-            return
+            return Mark.X
         } else if column.allSatisfy { $0.mark == Mark.O } {
             // Player O has won
-            return
+            return Mark.O
         }
     }
 
@@ -113,10 +113,11 @@ class Game: ObservableObject{
 
     if diagonal1.allSatisfy { $0.mark == Mark.X } || diagonal2.allSatisfy { $0.mark == Mark.X } {
         // Player X has won
-        return
+        return Mark.X
     } else if diagonal1.allSatisfy { $0.mark == Mark.O } || diagonal2.allSatisfy { $0.mark == Mark.O } {
         // Player O has won
-        return
+        return Mark.O
     }
     }
+    return false
 }
