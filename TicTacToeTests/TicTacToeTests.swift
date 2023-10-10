@@ -53,9 +53,9 @@ final class TicTacToeTests: XCTestCase {
 func testputmarks() {
         // Set up the game board with some non-empty marks
         game.putMark(0, 0)
-        XCTAssertEqual(game.current_board[0][0].mark, Mark.X)
+        XCTAssertEqual(game.current_board[0][0].mark, TicTacToe.Space(mark: .X))
         game.putMark(1, 1)
-         XCTAssertEqual(game.current_board[1][1].mark, Mark.O)
+         XCTAssertEqual(game.current_board[1][1].mark, TicTacToe.Space(mark: .O))
     }
         func testClearBoard() {
         // Set up the game board with some non-empty marks
@@ -69,7 +69,7 @@ func testputmarks() {
         // Verify that all cells are empty after clearing
         for row in 0..<3 {
             for column in 0..<3 {
-                XCTAssertEqual(game.current_board[row][column].mark, Mark.free)
+                XCTAssertEqual(game.current_board[row][column].mark, TicTacToe.Space(mark: .free))
             }
         }
         
