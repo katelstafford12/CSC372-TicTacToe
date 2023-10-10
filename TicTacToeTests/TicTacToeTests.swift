@@ -46,9 +46,9 @@ final class TicTacToeTests: XCTestCase {
 }
 
     func testHasWonVertical() {
-    game.setMark(row: 0, col: 0, mark: .o)
-    game.setMark(row: 1, col: 0, mark: .o)
-    game.setMark(row: 2, col: 0, mark: .o)
+    game.putMark(row: 0, col: 0, mark: .o)
+    game.putMark(row: 1, col: 0, mark: .o)
+    game.putMark(row: 2, col: 0, mark: .o)
     game.putMark(0, 0)
         game.putMark(1, 1)
         game.putMark(1, 0)
@@ -59,8 +59,8 @@ final class TicTacToeTests: XCTestCase {
 }
 
 func testHasNotWon() {
-    game.setMark(0,0)
-    game.setMark(1,0)
+    game.putMark(0,0)
+    game.putMark(1,0)
     XCTAssertFalse(game.hasWon())
 }
     func testPerformanceExample() throws {
