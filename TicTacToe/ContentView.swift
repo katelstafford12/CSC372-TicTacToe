@@ -24,14 +24,6 @@ struct ContentView: View {
                     .padding()
                 Spacer()
                 
-                Text(board_state.turnMessage()) // Title of game
-                    .font(.largeTitle)
-                    .bold()
-                    .foregroundColor(Color.green)
-                    .shadow(color: .green,radius: 10)
-                    .padding()
-                Spacer()
-                
                 VStack(spacing: border_size){
                     ForEach(0...2, id: \.self){ // Rows (3)
                         row in
