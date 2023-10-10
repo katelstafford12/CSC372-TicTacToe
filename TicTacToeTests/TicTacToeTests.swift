@@ -46,14 +46,11 @@ final class TicTacToeTests: XCTestCase {
 }
 
     func testHasWonVertical() {
-    game.putMark(row: 0, col: 0, mark: .o)
-    game.putMark(row: 1, col: 0, mark: .o)
-    game.putMark(row: 2, col: 0, mark: .o)
-    game.putMark(0, 0)
-        game.putMark(1, 1)
-        game.putMark(1, 0)
-        game.putMark(2, 2)
-        game.putMark(2, 0) 
+    game.putMark(0,0)
+    game.putMark(1,1)
+    game.putMark(1,0)
+    game.putMark(2,2)
+        game.putMark(2, 1)
     // Check if the game is considered as won
     XCTAssertTrue(game.hasWon())
 }
