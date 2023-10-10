@@ -35,6 +35,7 @@ class Game: ObservableObject{
     
     // Puts a mark on the board given a row and column
     func putMark(_ row: Int, _ column: Int){
+        
         if(current_board[row][column].mark != Mark.free){
             return
         }
@@ -45,7 +46,6 @@ class Game: ObservableObject{
         } else {
             current_board[row][column].mark = Mark.O
         }
-        checkWin()
         
         if (hasWon()){
             if (turn == Mark.X){
@@ -68,6 +68,7 @@ class Game: ObservableObject{
             // For changing turns
             if turn == Mark.X {
                 turn = Mark.O
+                AIturn()
             } else {
                 turn = Mark.X
             }
@@ -130,75 +131,58 @@ class Game: ObservableObject{
     }
     
     
-
+    
     func AIturn(){
+        
+        // Ensure AI only plays when it's O's turn
+        guard turn == Mark.O else {
+            return
+        }
         var availablePositions = [(row: Int, column: Int)]()
-
-    // Find all available positions on the board
-    for row in 0...2 {
-        for column in 0...2 {
-            if current_board[row][column].mark == Mark.free {
-                availablePositions.append((row, column))
+        
+        // Find all available positions on the board
+        for row in 0...2 {
+            for column in 0...2 {
+                if current_board[row][column].mark == Mark.free {
+                    availablePositions.append((row, column))
+                }
             }
         }
-    }
-
-    // Check if there are available positions to make a move
-    if availablePositions.isEmpty {
-        return 
-    }
-
-    // Randomly select one available position
-    let randomIndex = Int.random(in: 0..<availablePositions.count)
-    let (row, column) = availablePositions[randomIndex]
-
-    // Place the AI's mark in the selected position
-    current_board[row][column].mark = turn
-    checkWin() // Check for a win after making the move
-
-    // Switch the turn to the player's turn
-    if turn == Mark.X {
-        turn = Mark.O
-    } else {
-        turn = Mark.X
-    }
-    }
-
-    func checkWin(){
-        // Check rows for a win
-    for row in current_board {
-        if row.allSatisfy { $0.mark == Mark.X } {
-            // Player X has won
-            return Mark.X
-        } else if row.allSatisfy { $0.mark == Mark.O } {
-            // Player O has won
-            return Mark.O
+        
+        // Check if there are available positions to make a move
+        if availablePositions.isEmpty {
+            return
+        }
+        
+        // Randomly select one available position
+        let randomIndex = Int.random(in: 0..<availablePositions.count)
+        let (row, column) = availablePositions[randomIndex]
+        
+        // Place the AI's mark in the selected position
+        current_board[row][column].mark = turn
+        
+        //Check for victories
+        if (hasWon()){
+            if (turn == Mark.X){
+                scoreX += 1
+            }
+            else{
+                scoreO += 1
+            }
+            let winner = turn == Mark.X ? "X" : "O"
+            alertMessage = winner + " Wins!"
+            showMessage = true
+        }
+        
+        // Check for a draw
+        else if isDraw() {
+            alertMessage = "Draw!"
+            showMessage = true
+        }
+        else {
+            turn = Mark.X
         }
     }
 
-    // Check columns for a win
-    for columnIndex in 0...2 {
-        let column = current_board.map { $0[columnIndex] }
-        if column.allSatisfy { $0.mark == Mark.X } {
-            // Player X has won
-            return Mark.X
-        } else if column.allSatisfy { $0.mark == Mark.O } {
-            // Player O has won
-            return Mark.O
-        }
-    }
-
-    // Check diagonals for a win
-    let diagonal1 = [current_board[0][0], current_board[1][1], current_board[2][2]]
-    let diagonal2 = [current_board[0][2], current_board[1][1], current_board[2][0]]
-
-    if diagonal1.allSatisfy { $0.mark == Mark.X } || diagonal2.allSatisfy { $0.mark == Mark.X } {
-        // Player X has won
-        return Mark.X
-    } else if diagonal1.allSatisfy { $0.mark == Mark.O } || diagonal2.allSatisfy { $0.mark == Mark.O } {
-        // Player O has won
-        return Mark.O
-    }
-    return false
-    }
-
+    
+}
