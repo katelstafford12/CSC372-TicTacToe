@@ -33,6 +33,67 @@ final class TicTacToeTests: XCTestCase {
         XCTAssertFalse(game.isDraw())
     }
 
+    func testDraw() {
+        // Simulate a game where there's a winner
+        // You should set up the game board accordingly based on your game's implementation
+
+        game.putMark(0, 0)
+        game.putMark(0, 1)
+        game.putMark(2, 0)
+        game.putMark(1, 0)
+        game.putMark(1, 1) 
+        game.putMark(2, 2) 
+        game.putMark(1, 2) 
+        game.putMark(0, 2) 
+        game.putMark(2, 1) 
+
+        XCTAssertTrue(game.isDraw())
+    }
+
+func testputmarks() {
+        // Set up the game board with some non-empty marks
+        game.putMark(0, 0)
+        XCTAssertEqual(game.current_board[0][0].mark, Mark.X)
+        game.putMark(1, 1)
+         XCTAssertEqual(game.current_board[1][1].mark, Mark.O)
+    }
+        func testClearBoard() {
+        // Set up the game board with some non-empty marks
+        game.putMark(0, 0)
+        game.putMark(1, 1)
+        game.putMark(2, 2)
+        
+        // Clear the game board
+        game.clearBoard()
+        
+        // Verify that all cells are empty after clearing
+        for row in 0..<3 {
+            for column in 0..<3 {
+                XCTAssertEqual(game.current_board[row][column].mark, Mark.free)
+            }
+        }
+        
+        // Verify that the turn is reset to Mark.X
+        XCTAssertEqual(game.turn, Mark.X)
+    }
+
+    func testDraw() {
+        // Simulate a game where there's a winner
+        // You should set up the game board accordingly based on your game's implementation
+
+        game.putMark(0, 0)
+        game.putMark(0, 1)
+        game.putMark(2, 0)
+        game.putMark(1, 0)
+        game.putMark(1, 1) 
+        game.putMark(2, 2) 
+        game.putMark(1, 2) 
+        game.putMark(0, 2) 
+        game.putMark(2, 1) 
+
+        XCTAssertTrue(game.isDraw())
+    }
+
     func testHasWonHorizontal() {
     // Simulate a game where a player has won horizontally
         game.putMark(0, 0)
