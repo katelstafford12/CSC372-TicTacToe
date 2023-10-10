@@ -72,7 +72,6 @@ class Game: ObservableObject{
                 turn = Mark.X
             }
         }
-<<<<<<< HEAD
         
         
     }
@@ -130,8 +129,7 @@ class Game: ObservableObject{
         return turn == Mark.X ? "X's turn!" : "O's turn!"
     }
     
-=======
-    }
+    
 
     func AIturn(){
         var availablePositions = [(row: Int, column: Int)]()
@@ -201,7 +199,6 @@ class Game: ObservableObject{
         // Player O has won
         return Mark.O
     }
-    }
     return false
->>>>>>> origin/shiv
-}
+    }
+
